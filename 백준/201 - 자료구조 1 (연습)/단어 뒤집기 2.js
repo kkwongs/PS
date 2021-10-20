@@ -1,3 +1,48 @@
+// using stack, queue
+const S = require('fs').readFileSync('/dev/stdin').toString().trim();
+// const S = '<ab cd>ef gh<ij kl>';
+let stack = [];
+let queue = [];
+let result = [];
+let isReversed = true;
+
+for (let i = 0; i < S.length; i++) {
+  if (S[i] === '<') {
+    isReversed = false;
+    if (stack.length) {
+      result.push(stack.reverse().join(''));
+      stack = [];
+    }
+  }
+
+  if (S[i] === ' ' && isReversed) {
+    if (stack.length) {
+      result.push(stack.reverse().join(''));
+      result.push(S[i]);
+      stack = [];
+    }
+    continue;
+  }
+
+  if (isReversed) {
+    stack.push(S[i]);
+  } else {
+    queue.push(S[i]);
+  }
+
+  if (S[i] === '>') {
+    isReversed = true;
+    result.push(queue.join(''));
+    queue = [];
+  }
+}
+
+if (stack.length) {
+  result.push(stack.reverse().join(''));
+}
+
+console.log(result.join(''));
+
 /*
 const S = require('fs')
   .readFileSync('/dev/stdin')
@@ -22,6 +67,7 @@ for (let i = 0; i < S.length; i++) {
 console.log(result.join(''));
 */
 
+/*
 // improve
 const S = require('fs').readFileSync('/dev/stdin').toString();
 // const S = 'baekjoon online judge';
@@ -39,3 +85,4 @@ tmp.map((x) => {
 });
 
 console.log(result);
+*/
