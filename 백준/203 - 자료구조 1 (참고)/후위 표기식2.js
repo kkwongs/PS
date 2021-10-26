@@ -9,12 +9,9 @@ const postfix = input.shift().split('');
 const stack = [];
 
 for (let i = 0; i < postfix.length; i++) {
-  if (
-    postfix[i] === '+' ||
-    postfix[i] === '-' ||
-    postfix[i] === '*' ||
-    postfix[i] === '/'
-  ) {
+  if (postfix[i] >= 'A' && postfix[i] <= 'Z') {
+    stack.push(Number(input[postfix[i].charCodeAt(0) - 65]));
+  } else {
     const b = stack.pop();
     const a = stack.pop();
 
@@ -27,8 +24,6 @@ for (let i = 0; i < postfix.length; i++) {
     } else if (postfix[i] === '/') {
       stack.push(a / b);
     }
-  } else {
-    stack.push(postfix[i].charCodeAt(0) - 64);
   }
 }
 
