@@ -1,27 +1,24 @@
-const input = require('fs').readFileSync(0).toString().split('\n');
+const fs = require("fs");
+const [n, inputs] = fs.readFileSync(0).toString().trim().split("\n");
+const numbers = inputs.split(" ").map((n) => Number(n));
 
-const N = input.shift();
-const numbers = input.shift().split(' ');
 let result = 0;
+for (let i = 0; i < n; i++) {
+  const number = numbers[i];
 
-function isPrime(num) {
-  if (num < 2) {
-    return false;
-  }
+  let isPrime = true;
 
-  for (let i = 2; i <= Math.sqrt(num); i++) {
-    if (num % i === 0) {
-      return false;
+  if (number === 1) isPrime = false;
+  else {
+    for (let j = 2; j * j <= number; j++) {
+      if (number % j === 0) {
+        isPrime = false;
+        break;
+      }
     }
   }
 
-  return true;
-}
-
-for (let i = 0; i < N; i++) {
-  if (isPrime(numbers[i])) {
-    result++;
-  }
+  if (isPrime) result++;
 }
 
 console.log(result);

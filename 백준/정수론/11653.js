@@ -1,14 +1,12 @@
-let N = Number(require('fs').readFileSync(0).toString());
-let prime = 2;
-let result = '';
+const fs = require("fs");
+let n = Number(fs.readFileSync(0).toString().trim());
+let i = 2;
 
-while (N > 1) {
-  if (N % prime === 0) {
-    result += `${prime}\n`;
-    N /= prime;
+while (n > 1) {
+  if (n % i === 0) {
+    console.log(i);
+    n /= i;
   } else {
-    prime++;
+    i++;
   }
 }
-
-console.log(result);

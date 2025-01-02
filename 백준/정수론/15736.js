@@ -1,10 +1,6 @@
+// 제곱수를 구하는 문제
+
 const fs = require("fs");
-const N = Number(fs.readFileSync(0).toString().trim());
+const N = Number(fs.readFileSync(0).toString());
 
-let result = 1;
-
-for (let i = 2; i * i <= N; i++) {
-  result++;
-}
-
-console.log(result);
+console.log(Math.floor(Math.sqrt(N)));
