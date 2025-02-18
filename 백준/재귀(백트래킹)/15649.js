@@ -1,29 +1,25 @@
 const solution = (input) => {
-  const [n, m] = input[0].split(" ").map(Number);
-  const seq = [...Array(m)].fill(0);
-  const visited = [...Array(n)].fill(false);
-  let result = "";
+  const recur = (number) => {
+    if (number === m) {
+      answer.push(arr.join(" "));
+      return;
+    }
 
-  function recur(k) {
-    if (k === m) {
-      const arr = [];
-      for (let i = 0; i < m; i++) {
-        arr.push(seq[i]);
-      }
-      return (result += `${arr.join(" ")}\n`);
-    }
     for (let i = 1; i <= n; i++) {
-      if (!visited[i]) {
-        seq[k] = i;
-        visited[i] = true;
-        recur(k + 1);
-        visited[i] = false;
-      }
+      if (arr.includes(i)) continue;
+      arr.push(i);
+      recur(number + 1);
+      arr.pop();
     }
-  }
+  };
+
+  const [n, m] = input[0].split(" ").map(Number);
+  const arr = [];
+  const answer = [];
 
   recur(0);
-  return result;
+
+  return answer.join("\n");
 };
 
 const filePath = process.platform === "linux" ? 0 : "./input.txt";
